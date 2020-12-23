@@ -18,7 +18,7 @@ app.get("",(req,res)=>{
     res.render('index',{title:"this is title",name:"this is name"});
 });
 app.get("/home",(req,res)=>{
-    console.log("hitting service home");
+   
     res.send("home page");
 });
 app.get('/help',(req,res)=>{
