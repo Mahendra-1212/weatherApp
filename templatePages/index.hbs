@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>this is title</title>
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+        <style>
+table, tr {
+  border: 1px solid black;
+}
+td{
+    text-align: center;
+}
+</style>
+    </head>
+    <body>
+        {{>header}}
+     
+         <input type="text" name="weather" placeholder="search" id="data" >
+         <button onclick="search()">search</button>
+     <br><br>
+        <table width="100%" >
+            <thead>
+<tr>
+           <td>CityName</td>
+           <td>Region</td>
+           <td>humidity</td>
+           <td>Cloud cover</td>
+           <td>temperature</td>
+       </tr>
+            </thead>
+       
+      <tbody>
+           <tr>
+           <td id="name"></td>
+           <td id='region'></td>
+           <td id="humidity"></td>
+           <td id='cloud'></td>
+           <td id='temperature'></td>
+       </tr>
+      </tbody>
+        </table>
+        <script>
+            function search(){
+                var location1=$("#data").val();
+                var url="http://localhost:3000/weather?location="+location1;
+                console.log("search called");
+           fetch(url).then((response)=>{
+               response.json().then((data)=>{
+                   console.log(data);
+                   $("#name").text(data.body.location.name);
+                   $("#region").text(data.body.location.region);
+                   $("#humidity").text(data.body.current.humidity);
+                   $("#cloud").text(data.body.current.cloudcover);
+                   $("#temperature").text(data.body.current.temperature);
+
+               })
+           })
+            }
+            
+        </script>
+    </body>
+</html>
